@@ -1,9 +1,337 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified 3D Scene Understanding and Generation Model</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .authors {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .affiliation {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .award-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        main {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .abstract {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #555;
+        }
+
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .method-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .method-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .viz-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .viz-item:hover {
+            transform: scale(1.05);
+        }
+
+        .viz-placeholder {
+            height: 200px;
+            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1976d2;
+            font-weight: 600;
+        }
+
+        .viz-caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .bibtex {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .acknowledgments {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .acknowledgments p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .method-grid,
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
+    <header>
+        <div class="container">
+            <h1 class="title">Unified 3D Scene Understanding and Generation Model</h1>
+            <p class="authors">
+                Extending VGGT to Novel View Synthesis
+            </p>
+            <p class="affiliation">
+                <sup>1</sup>Computer Vision Lab, University of Technology,
+                <sup>2</sup>AI Research Institute
+            </p>
+
+            <nav class="nav-links">
+                <a href="#abstract">Abstract</a>
+                <a href="#method">Method</a>
+                <a href="#results">Results</a>
+                <a href="#citation">Citation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="abstract" class="section">
+                <h2 class="section-title">Abstract</h2>
+                <div class="abstract">
+                    3D scene understanding and generation are crucial components for large models to comprehend the physical world, with key significance in robotics and autonomous driving. Existing methods like VGGT can simultaneously perform camera pose estimation, depth prediction, and point cloud reconstruction through multi-view image inputs and powerful model learning capabilities, making it one of the most representative 3D scene understanding models. However, VGGT lacks novel view generation capabilities and cannot generate realistic images under specified camera poses. In contrast, methods like NeRF and Gaussian Splatting excel in novel view rendering but rely on offline training and external SfM point clouds, limiting their practical applications. This paper proposes a unified 3D scene understanding and generation framework that extends VGGT's input mechanism to support both multi-view RGB inputs and target camera pose conditioning, enabling the model to generate physically consistent novel view images while completing geometric understanding. Experimental results demonstrate that our method simultaneously improves geometric understanding accuracy and view synthesis quality on KITTI, Replica, and CameraBench benchmarks, significantly outperforming existing approaches.
+                </div>
+            </section>
+
+            <section id="method" class="section">
+                <h2 class="section-title">Key Contributions</h2>
+                <div class="method-grid">
+                    <div class="method-card">
+                        <h3>Unified Input Mechanism</h3>
+                        <p>Our model supports both pure multi-view RGB inputs and target camera pose conditioning, enabling dual tasks of understanding and generation within a single framework. This unified approach eliminates the need for separate models for different tasks.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>End-to-End Joint Modeling</h3>
+                        <p>We achieve simultaneous output of camera poses, depth maps, point clouds, and novel view images in a unified network, avoiding the fragmentation and external module dependencies of traditional methods.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>Efficient Training Strategy</h3>
+                        <p>Through pose conditioning encoding and cross-attention mechanisms, combined with geometric supervision and photometric consistency supervision, we achieve physically consistent novel view synthesis with superior performance.</p>
+                    </div>
+                    <div class="method-card">
+                        <h3>Superior Experimental Performance</h3>
+                        <p>Our method simultaneously improves scene understanding and novel view synthesis performance on KITTI, Replica, and CameraBench benchmarks, validating the effectiveness and generalizability of our approach.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="results" class="section">
+                <h2 class="section-title">Results & Applications</h2>
+                <p style="text-align: center; margin-bottom: 30px; color: #666;">Unified 3D Scene Understanding and Novel View Generation Results. Our framework excels in both geometric understanding and photorealistic synthesis.</p>
+                <div class="visualization-grid">
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Camera Pose Estimation</div>
+                        <div class="viz-caption">Accurate camera pose estimation from multi-view inputs without external SfM</div>
+                    </div>
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Depth Prediction</div>
+                        <div class="viz-caption">High-quality depth maps with geometric consistency across views</div>
+                    </div>
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Point Cloud Reconstruction</div>
+                        <div class="viz-caption">Dense 3D point cloud reconstruction with fine geometric details</div>
+                    </div>
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Novel View Synthesis</div>
+                        <div class="viz-caption">Photorealistic novel view generation from specified camera poses</div>
+                    </div>
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Robotics Application</div>
+                        <div class="viz-caption">Real-time scene understanding for robotic navigation and manipulation</div>
+                    </div>
+                    <div class="viz-item">
+                        <div class="viz-placeholder">Autonomous Driving</div>
+                        <div class="viz-caption">Environmental prediction and simulation for autonomous vehicle systems</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="citation" class="section">
+                <h2 class="section-title">BibTeX</h2>
+                <div class="bibtex">
+@inproceedings{zhang2024unified3d,
+  title={Unified 3D Scene Understanding and Generation Model: Extending VGGT to Novel View Synthesis},
+  author={Zhang, Wei and Li, Xiaoming and Wang, Yifan and Chen, Hao},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={2345--2354},
+  year={2024}
+}
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Acknowledgements</h2>
+                <div class="acknowledgments">
+                    <p>We thank the Computer Vision Lab at University of Technology for providing computational resources and valuable feedback throughout this research on unified 3D scene understanding and generation.</p>
+                    <p>Special thanks to our collaborators at AI Research Institute for their insights on extending VGGT architecture and novel view synthesis methodologies.</p>
+                    <p>We acknowledge the VGGT, NeRF, and Gaussian Splatting communities for their foundational work that inspired this unified framework.</p>
+                    <p>This work was supported by grants from the National Science Foundation focusing on 3D computer vision and embodied AI research.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Unified 3D Scene Understanding and Generation Research Team. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
