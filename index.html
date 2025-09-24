@@ -193,6 +193,21 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
+        .framework-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            margin: 30px auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .framework-image:hover {
+            transform: scale(1.02);
+        }
+
         .viz-caption {
             padding: 15px;
             font-size: 0.9rem;
@@ -287,7 +302,7 @@
                 
                 <div class="architecture-section">
                     <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5rem;">Unified Architecture</h3>
-                    <img src="images/image_000.png" alt="Unified 3D Scene Understanding and Generation Architecture" class="architecture-image">
+                    <img src="images/U3D_UGen_Framework_Diagram.png" alt="U3D-UGen Framework" class="framework-image">
                     <p style="margin-top: 15px; color: #666; font-style: italic;">Overall architecture of our unified framework extending VGGT for both scene understanding and novel view synthesis</p>
                 </div>
 
